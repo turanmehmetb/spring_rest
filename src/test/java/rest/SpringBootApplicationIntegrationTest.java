@@ -34,8 +34,7 @@ public class SpringBootApplicationIntegrationTest {
 	    }
 	  
 	    @Test
-	    public void test1()
-	      throws Exception { 
+	    public void test1() throws Exception { 
 	    	MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
 	    	MediaType.APPLICATION_JSON.getSubtype());
 	        mockMvc.perform(MockMvcRequestBuilders.get("/reservation")).
@@ -83,10 +82,9 @@ public class SpringBootApplicationIntegrationTest {
 	        andExpect(MockMvcResultMatchers.content().contentType(contentType)).	    
 	        andExpect(jsonPath("$").value(1)); 
 	    }
-	    
+	   
 	    @Test
-	    public void test4()
-	      throws Exception { 
+	    public void test4() throws Exception { 
 	    	MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
 	    	MediaType.APPLICATION_JSON.getSubtype());
 	        mockMvc.perform(MockMvcRequestBuilders.get("/reservation")).
@@ -96,8 +94,7 @@ public class SpringBootApplicationIntegrationTest {
 	    }
 	    
 	    @Test
-	    public void test5()
-	      throws Exception { 
+	    public void test5() throws Exception { 
 	    	MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
 	    	MediaType.APPLICATION_JSON.getSubtype());
 	        mockMvc.perform(MockMvcRequestBuilders.delete("/reservation/1")).
@@ -105,5 +102,23 @@ public class SpringBootApplicationIntegrationTest {
 	        andExpect(MockMvcResultMatchers.content().contentType(contentType)).
 	        andExpect(jsonPath("$").value(1)); 
 	    } 
+	    
+	    @Test
+	    public void test6() throws Exception { 
+	    	MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
+	    	MediaType.APPLICATION_JSON.getSubtype());
+	        mockMvc.perform(MockMvcRequestBuilders.delete("/reservation/1")).
+	        andExpect(MockMvcResultMatchers.status().is(404));
+	    } 
+	    
+	    @Test
+	    public void test7() throws Exception { 
+	    	MediaType contentType = new MediaType(MediaType.APPLICATION_JSON.getType(),
+	    	MediaType.APPLICATION_JSON.getSubtype());
+	        mockMvc.perform(MockMvcRequestBuilders.get("/reservation")).
+	        andExpect(MockMvcResultMatchers.status().isOk()).
+	        andExpect(MockMvcResultMatchers.content().contentType(contentType)).
+	        andExpect(jsonPath("$.size()").value(1)); 
+	    }
 	    
 }

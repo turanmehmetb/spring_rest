@@ -39,13 +39,13 @@ public class ReservationController {
     @RequestMapping(value = "/reservation/{reservationId}", method = RequestMethod.DELETE)
     public int cancel(@PathVariable int reservationId) throws NotFoundException {
     	int deletedId = repository.deleteReservation(reservationId);
-    	if(deletedId == -1) throw new NotFoundException("Reservations not found!");
+    	if(deletedId == -1) throw new NotFoundException("Reservation not found!");
         return deletedId;
     }
     
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<Object> handleItemNotFoundException(NotFoundException exception){
+    public ResponseEntity<Object> handleReservationNotFoundException(NotFoundException exception){
         return new ResponseEntity<Object>(exception.getMessage(), HttpStatus.NOT_FOUND);
     }
 }
